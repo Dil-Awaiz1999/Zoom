@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <title>Zoom</title>
+<style>
+        body{
+            padding: 0;
+            margin: 0;
+            font-family: sans-serif;
+        }
+        header{
+            background: #00031F;
+            
+        }
+        header ul{
+            text-transform: capitalize;
+            padding: 6px;
+            margin: 0;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            list-style: none;
+            gap: 1rem;
+            color: white;
+            width: 95%;
+        }
+        nav{
+            width: 100%;
+            margin: auto;
+            box-shadow: 1px 1px 3px 0.5px #232333;
+            position: fixed;
+            justify-content: space-around;
+        }
+        nav, nav ul{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+            position: relative;
+
+        }
+        nav ul{
+            gap: 1.5rem;
+            font-weight: 600;
+            color: gray;
+            text-transform: capitalize;
+            
+        }
+        nav ul button{
+            background-color: #0B5CFF;
+            color: white;
+            text-transform: capitalize;
+            padding: 0.7rem 1.5rem;
+            border-radius: 20px;
+            border: none;
+            font-size: 1rem;
+            
+        }
+
+        nav i{
+            font-size: 2rem;
+            display: none;
+            position: absolute;
+            right: 0;
+        }
+
+        main{
+            width: 100%;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+        }
+        .notice-wrapper{
+            position: absolute;
+            left: 60px;
+            margin-top: 30px;
+            z-index: 2;
+            background: rgba(144,224,224,0.1);
+            border: 1px solid #90e0e0;
+            border-radius: 25px;
+            padding: 2px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #232333;
+            height: 30px;
+            width: 520px;
+            gap: 0.8rem;
+        }
+        .bell-icon i{
+            display: inline-block;
+            height: 20px;
+            width: 20px;
+            background: #90e0e0;
+            border-radius: 100%;
+            text-align: center;
+        }
+        .register-text p{
+            color:#0B5CFF;
+            font-size: 0.9rem;
+        }
+        .AI-text{
+            font-size: 0.9rem;
+        }
+        .p-container{
+            width: 110px;
+            height: 2px;
+            border-radius: 2px;
+            background: #b5d0f8;
+            position: absolute;
+            z-index: 2;
+            left: 60px;
+            margin-top: 100px;
+        }
+        .chat-button{
+            position: absolute;
+            height: 80px;
+            width: 80px;
+            clip-path: circle();
+            background-color: #0B5CFF;
+            bottom: 0%;
+            right:0%;
+            margin-right: 20px;
+            padding-top: 20px;
+            padding-left: 30px;
+            box-shadow: 2px 2px 10px 10px rgba(144,224,224,0.1);
+        }
+        .images-section i{
+            font-size: 50px;
+        }
+        .title-section{
+            padding: 4rem;
+            width: 50%;
+            
+        }
+        .title-section h1{
+            font-size: 5rem;
+        }
+        .title-section p{
+            font-size: 1.5rem;
+        }
+        .images-section{
+            background-color: rgb(244, 244, 244);
+            position: relative;
+            height: 600px;
+            width: 50%;
+        }
+        .image1,.image2{
+            position: absolute;
+        }
+        .image1{
+            right: 20px;
+            /* top:20px */
+        }
+        .image2{
+            bottom: 20px;
+            left:-80px
+        }
+        
+        span{
+            color: #0B5CFF;
+        }
+
+        main button{
+            background-color: #0B5CFF;
+            color: white;
+            text-transform: capitalize;
+            padding: 0.8rem 1.5rem;
+            border-radius: 20px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        main button:last-child{
+            background: transparent;
+            color:#0B5CFF;
+        }
+       
+
+        .images-section img{
+            border-radius: 20px;
+        }
+        .brand{
+            display: flex;
+        }
+
+        .second-section{
+            display: flex;
+            width: 100%;
+            background-color: rgb(244, 244, 244);
+            position: relative;
+        }
+        .img-section{
+            width: 35%;
+        }
+        .left{
+            height: 100%;
+            width: 30%;
+            background: #00031f;
+            color: #fff;
+            padding-bottom: 5rem;
+        }
+        .left img{
+            padding: 15px 15px 0px 20px;
+            height: 70px;
+            width: 330px;
+            
+        }
+        .left h2{
+            width: 70%;
+            margin: auto;
+            padding-top: 4rem;
+            padding-bottom: 2rem;
+            font-size: 2rem;
+        }
+        .logo-container{
+            background-color: #0B5CFF;
+            height: 50%;
+            width: 100%;
+        }
+        .left-text ul li{
+            list-style: none;
+            margin-top: 1rem;
+        }
+        .left-text ul li button{
+            background-color: transparent;
+            color: white;
+            text-transform: capitalize;
+            padding: 0.7rem 1.5rem;
+            border-radius: 20px;
+            border: 1px solid white;
+            font-size: 1rem;
+        }
+        .right{
+            display: flex;
+            width: 50%;
+        }
+        .bg-img img{
+            
+            border-radius: 20px;
+        }
+        .img-section{
+            margin-left: 50%;
+            margin-top: 20%;
+            position: relative;
+            height: 600px;
+            width: 70%;
+        }
+        .image3,.image4{
+            position: absolute;
+        }
+        .image3{
+            right: -50px;
+            box-shadow: 15px 15px 0px 0px #b5d0f8;
+            border-radius: 20px;
+        }
+        .image4{
+            bottom: 180px;
+            left: -150px
+        }
+        .text-container{
+            margin-left: 20%;
+            width: 60%;
+            margin-top: 5rem;
+        }
+        .text-com h2{
+            font-size: 1.8rem;
+        }
+        .text-com p{
+            font-size: 1rem;
+        }
+        .feature-lists{
+            display: flex;
+            margin-left: -2rem;
+        }
+        .feature-lists li{
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+        .second-li{
+            margin-left: 1rem;
+        }
+        .text-containerbtn{
+            background-color: transparent;
+            color: black;
+            text-transform: capitalize;
+            padding: 0.7rem 1.5rem;
+            border-radius: 20px;
+            border: 1px solid #b5d0f8;
+            font-size: 1rem;
+        }
+        .text-containerbtn:hover{
+            background-color: #b5d0f8;;
+        }
+        .third-section{
+            height: 50%;
+            width: 100%;
+            background-color: rgb(244, 244, 244);
+            position: relative;
+        }
+        .letter-area{
+            height: 50%;
+            width: 50%;
+        }
+        .container{
+            display: flex;
+            padding: 3%;
+        }
+        .images-area{
+            display: flex;
+            height: 50%;
+            width: 50%;
+        }
+        .letter-area{ 
+            margin: auto;
+        }
+        .letter-area h2{ 
+            font-size: 1.6rem;
+        }
+        a{
+            color: #0B5CFF;
+            font-size: 1rem;
+        }
+        .letter-area span i{
+            color: #0B5CFF;
+        }
+        .letter-area:hover a{
+            color: blue;
+        }
+        .forth-section{
+            background: #00053d;
+            height: 50%;
+            width: 100%;
+            color: white;
+            display: flex;
+            padding-top: 6rem;
+            padding-bottom: 5rem;
+            padding-left: 2rem;
+        }
+        .zoom-wheel-text{ 
+            margin-right: -20%; 
+            margin-left: 50%;
+             width: 100%;
+        }
+        .zoom-wheel-text h2{
+            font-size: 2.5rem;
+        }
+        .zoom-wheel-text p{
+            font-size: 1rem;
+            width: 100%;
+        }
+        .zoom-wheel-text a{
+            color: white;
+            font-weight: bold;
+        }
+        .zoom-wheel-text span i{
+            color: white;
+        }
+        .zoom-container{
+           position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* margin: auto; */
+        }
+        .zoom-wheel-img{
+            position: absolute;
+        }
+       
+
+        @media only screen and (max-width:600px){
+            header{
+                display: none;
+            }
+            nav i{
+            display: flex;
+            }
+            nav ul li{
+                width: 100%;
+
+            }
+            nav,nav ul{
+                flex-direction: column;
+                width: 100%;
+                justify-content: flex-start;
+            }
+            nav ul{
+                height: 0;
+                overflow: hidden;
+            }
+            .title-section{
+                width: 100%;
+                padding: 1rem;
+            }
+            main{
+                width: 100%;
+                flex-direction: column;
+            }
+            .images-section{
+                width: 100%;
+                height: 300px;
+            }
+            .images-section img:first-child{
+                width: 160px;
+            }
+            .images-section img:last-child{
+                width: 210px;
+                bottom:0
+            }
+    }       
+    </style>
+</head>
+<body>
+    <header>
+        <ul>
+            <li>support</li>
+            <li>35465132486615</li>
+            <span style="border-left: 1px solid gray; height: 30px;"></span>
+            <li>Contact sales</li>
+            <li>request a demo</li>
+        </ul>
+    </header>
+    <nav>
+        <div class="brand">
+            <img src="https://us06st2.zoom.us/static/6.3.12613/image/new/topNav/Zoom_logo.svg" alt="">
+            <ul class="items">
+                <li>Products</li>
+                <li>solutions</li>
+                <li>resources</li>
+                <li>plans & pricing</li>
+                
+            </ul> 
+        </div>
+        <ul class="items">
+            <li>join</li>
+            <li>host</li>
+            <li>whiteboard</li>
+            <li><button>my account</button></li>
+        </ul>
+        <i id="btn" class="bi bi-list"></i>
+    </nav>
+    
+    <main>
+        <div class="notice-wrapper">
+            <div class="bell-icon">
+                <i class="bi bi-bell"></i>
+            </div>
+            
+            <div class="AI-text">
+                <p>AI and human connectoin at work</p>
+                
+            </div>
+            <span style="border-left: 1px solid #90e0e0; height: 30px;"></span>
+            <div class="register-text">
+                <a href="https://explore.zoom.us/en/event/wts/may-2023/#ez--wts-f24" target="blank">Register for our virtual summit</a>
+               
+            </div>
+            <i class="bi bi-chevron-right"></i>
+        </div>
+        <div class="p-container">
+            <div class="p-progress"></div>
+        </div>
+        <div class="title-section">
+            <h1>one platform to <span> connect </span></h1>
+            <p>List Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem dignissimos cupiditate, reiciendis exercitationem quasi modi hic nulla praesentium laudantium esse?
+                </p>
+                <button>plans & pricing</button>
+                <button>sign up its free</button>
+        </div>
+        <div class="images-section">
+                <img class="image1" width="300px" src="https://us06st2.zoom.us/static/6.3.12613/image/home2/slide2-1.jpg" alt="">
+                <img class="image2" width="350px" src="https://us06st2.zoom.us/static/6.3.12613/image/home2/slide2-4.jpg" alt="">
+                
+                <div class="chat-button">
+                    <i class="bi bi-chat-heart"></i>
+                </div>    
+        </div>
+    </main>
+    <div class="second-section">
+        <div class="left">
+            <div class="logo-container">
+                <img src="https://st1.zoom.us/static/6.3.12613/image/home2/zoom-products.png" alt="">
+            </div>
+            
+            <div class="left-text">
+                <h2>Flexible solutions for modern team collaboration</h2>
+                <ul>
+                    <li><button>Zoom One</button></li>
+                    <li><button>Spaces</button></li>
+                    <li><button>Events</button></li>
+                    <li><button>Contact Center</button></li>
+                    <li><button>Developers</button></li>
+                </ul>
+            </div>
+        </div>
+        <div class="right">
+             <div class="img-section">
+                    <img class="image3" width="350px" height="350px" src="	https://st1.zoom.us/static/6.3.12613/image/home2/img1.jpg" alt="">
+                    <img class="image4" width="280px" src="https://st2.zoom.us/static/6.3.12613/image/home2/clips1.png" alt="">
+            </div> 
+            <div class="text-container">
+                <div class="text-com">
+                    <h2>Unified communication and collaboration platform</h2>
+                    <p>Make meaningful connections with meetings, team chat, whiteboard, phone, and more in one offering.</p>
+                </div> 
+                <ul class="feature-lists">
+                    <div class="first-list">
+                        <li><img style="height: 30px; background-color: lightskyblue" src="https://explore.zoom.us/media/meetings-logo.svg" target="blank" alt=""></li>
+                        <li><img style="height: 30px; background-color: lightskyblue" src="https://explore.zoom.us/media/group-1.png" target="blank" target="blank" alt=""></li>
+                        <li><img style="height: 30px; background-color: lightskyblue" src="https://explore.zoom.us/media/iq-for-sales-logo.svg" target="blank" alt=""></li>
+                        <li><img style="height: 30px; background-color: lightskyblue" src="https://explore.zoom.us/media/team-chat-1-1.svg" target="blank" alt=""></li>
+                    </div>
+                    <div class="second-li">
+                        <li><img style="height: 30px; background-color: lightskyblue" src="https://explore.zoom.us/media/whiteboard-logo.svg" target="blank" alt=""></li>
+                        <li><img style="height: 30px; background-color: lightskyblue" src="https://explore.zoom.us/media/email-plus-calendar.svg" target="blank" alt=""></li>
+                        <li><img style="height: 30px; background-color: lightskyblue" src="https://explore.zoom.us/media/zoom-huddles.svg" target="blank" alt=""></li>
+                    </div>  
+                </ul>
+                <button class="text-containerbtn">Discover Zoom One</button>
+            </div>
+        </div>
+    </div>
+    <div class="third-section">
+        <div class="container">
+            <div class="letter-area">
+                <h2>Businesses around the globe choose Zoom</h2>
+                <a href="https://explore.zoom.us/en/customer/all/" target="blank">Read their Stories</a> 
+                <span><i class="bi bi-chevron-right"></i></span>
+            </div>
+            <div  class="images-area">
+                <div class="col1">
+                    <img width="150px" src="https://file-paa.zoom.us/VrcyryqORpezX4RSo0Nuxw/MS4yLt7soJFBCy-RQWg-GKhxZ_DUYkiBYNy6LAYca6t__6zk/17926e4a-329a-4a0e-9ffd-fb28e886231b.png" alt="">
+                    <img width="150px" src="https://file-paa.zoom.us/F0tWGQRzTvm94QgWBlusXQ/MS4yLuRuAYUaZz7vBqiIcJa51s5mY6de8ruEtZq5pUn_rb3d/21f2f230-adba-4a90-a8f2-75a201d7d3de.png" alt="">
+                    <img width="150px" src="https://file-paa.zoom.us/F6tCI9t7T2WVCdQ6JhfQFQ/MS4yLrllxzjWjxPipLS_ngOciHwoUNFdF-hrXPf1pTtBjvsk/34912812-2672-4a6a-a539-514d833cf7cc.png" alt="">
+                </div>
+                <div class="col2">
+                    <img width="150px" src="https://file-paa.zoom.us/zf7v2ZIvQJOqdsU_tpMFXA/MS4yLsF1iXXRAD5_6ye5hc9oGnxSw64lOqPRODrGRAlVi_Fa/26d1582c-d830-4100-96b3-cbca2714d55e.png" alt="">
+                    <img width="150px" src="https://file-paa.zoom.us/2TaamY85SKWR5KMestYjMw/MS4yLtPP5rOom8D9_rSEpriJ-VyPlNQ8ZtC-9R7s4J_If-7X/c983ab16-753d-4680-a523-96c1a587cde6.png" alt="">
+                    <img width="150px" src="https://file-paa.zoom.us/fsS4ptYHQdm3I1ti5jW_mw/MS4yLrFCR7O7hXoROxix8ZxQIzEn0Hv9jybxZW_EyPS10Npd/593c24f5-b1ea-4845-ab3e-5df7e83102a6.png" alt="">
+                </div>
+                <div class="col3">
+                    <img width="150px" src="https://file-paa.zoom.us/FzY8XBWBRNK68etsjKCuiA/MS4yLmfyz6T0Hs3r5jN7zOxF9VvI9jIsg00gymXSaXeo4TUH/3c1984d5-4ae8-429e-ac3c-1d6e1764bfd4.png" alt="">
+                    <img width="150px" src="https://file-paa.zoom.us/J7M5FnjMQ9CiFyGvsj0U_Q/MS4yLo2J3FoyED44lcGuKnruwXshjUkZ8dir95VjQx_b1wgY/e5bb1721-1fa9-46f2-9560-08c39fa741e6.png" alt="">
+                    <img width="150px" src="https://file-paa.zoom.us/RmGIvMfUSV-T74Q2lxGJew/MS4yLg1ICpmSbNMHXitGwyOPOJ5i3-kNuwAH3E68MRKPC_AC/e3ea7630-e9be-4582-888e-ea3f3696d455.png" alt="">
+                </div>
+                <div class="col4">
+                    <img width="150px" src="https://file-paa.zoom.us/92oiDZMqQxGGmU1PpPf4-A/MS4yLvgwB31QKQa2v7RAHdaFrUSEOXUsIps9SbYSPv-emHQ5/ede003c3-cefe-455f-9430-100b189d353a.png" alt="">
+                    <img width="150px" src="https://file-paa.zoom.us/W7omHyfJQtOV08j4jDyXng/MS4yLiUnV_aHGlUhZ6rFLtNw06V0AosTmaNY8_s40G484YDS/7aee609b-5935-4fb7-aeb0-1da136b2d971.png" alt="">
+                    <img width="150px" src="https://file-paa.zoom.us/jXzLnIlQSoikKFvseUj6-A/MS4yLn3MNf90sUeHBciqfA4a1gr0e2aUoZNpIGX9Yvn6tFEf/c5751e30-92bf-4a36-8e86-7b38e25dbde5.png" alt="">
+                </div>
+            </div>
+        </div> 
+        <div class="forth-section">
+            <div class="zoom-container">
+                <div class="zoom-wheel-img">
+                    <img width="45%" src="https://st2.zoom.us/static/6.3.12613/image/home2/zm-product-wheel.png" alt="">
+                </div>
+                <div class="zoom-wheel-text">
+                    <h2>Make work less work</h2>
+                    <p>Securely connect and collaborate so you can work better together. Simple to manage and delightful to use, Zoom powers the modern workforce.</p>
+                    <a href="https://explore.zoom.us/en/collaboration-tools/" target="blank">Discover the Possibilities</a>
+                    <span><i class="bi bi-chevron-right"></i></span>
+                </div>
+            </div>    
+        </div>
+    </div>
+    
+</body>
+</html>
